@@ -2,8 +2,8 @@
 
 ## Introduction
 
-Chabotsio est une application web de chatbot qui peut être exécutée localement sur votre machine. 
-Elle utilise des modèles de langage fournis par Ollama pour générer des réponses. 
+Chabotsio est une application web de chatbot qui peut être exécutée localement sur votre machine.
+Elle utilise des modèles de langage fournis par Ollama pour générer des réponses.
 L'application est construite avec Express et Bun pour le backend, Vue.js pour le frontend, et MongoDB comme base de données.
 
 ## Prérequis
@@ -15,11 +15,16 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 - [MongoDB](https://www.mongodb.com/) (BDD)
 - [Ollama](https://ollama.ai/) (pour les modèles de langage)
 
+## Instalation
+
+``` zsh
+    git clone https://github.com/M0hess/Chatbot.git 
+```
+
 ## Installation Frontend
 
 ``` szh
-    git clone <url_depot> nom_dossier
-    cd nom_dossier
+    cd frontend
     bun install
     bun dev
 ```
@@ -30,19 +35,50 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 - [Ollama models list](https://ollama.com/search)
 
 ``` szh
-    ollama pull nom_du_model
+    # Télécharge un modèle de langage depuis le référentiel d'Ollama et l'enregistre localement sur la machine
+    ollama pull <nom_du_model>
+
+    # Liste les modèles disponible
+    ollama list
+
+    # Supprimer un modèle
+    ollama rm <nom_du_model>
 ```
 
 
 ## Installation Backend
 
 ``` szh
-    git clone <url_depot> nom_dossier
-    cd nom_dossier
+    cd backend
     mv .env.example .env
     bun install
     bun dev
 ```
+
+## MONGODB AS DOCKER SERVICE (optionnelle)
+
+``` yml
+    services:
+  mongodb:
+    image: mongodb/mongodb-community-server:7.0.11-ubi8
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: chatbot
+      
+    restart: always
+```
+
+``` zsh
+    # Run the service
+    docker-compose up
+    # Stop the service
+    docker-compose down
+```
+
 
 ## Seeding
 
@@ -124,7 +160,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 ```
 
 
-## Backend Endpoints 
+## Backend Endpoints
 
 ``` js
 
